@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @GetMapping("admin")
+    @GetMapping("/admin")
     public ResponseEntity<?> adminEntity(){
         return ResponseEntity.ok("Bien logiado aministrador");
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
     public ResponseEntity<?> userEntity(){
         return ResponseEntity.ok("Bien logiado usuario");
+    }
+
+    @GetMapping("/ad")
+    public String us(){
+        return "Hola admin";
     }
 
 
