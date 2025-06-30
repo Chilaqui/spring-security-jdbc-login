@@ -1,8 +1,7 @@
 package com.security.app.config;
 
-import java.beans.Customizer;
-
 import javax.sql.DataSource;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,10 +23,11 @@ public class SecurityConfig {
 
         http
             .authorizeHttpRequests( auth -> auth
-                .requestMatchers("/auth/admin").hasRole("ADMIN")
-                .requestMatchers("/auth/user").hasRole("USER")
+                .requestMatchers("/auth/admin").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/auth/user").hasAuthority("ROLE_USER")
                 .anyRequest().authenticated()
             )
+            .httpBasic(withDefaults())
             .formLogin(form -> form.disable());
         
         return http.build();
@@ -39,6 +39,7 @@ public class SecurityConfig {
         return new  JdbcUserDetailsManager(dataSource);
     }
 
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
