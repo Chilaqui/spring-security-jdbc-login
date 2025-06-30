@@ -24,8 +24,8 @@ public class SecurityConfig {
 
         http
             .authorizeHttpRequests( auth -> auth
-                .requestMatchers("/auth/admin").hasRole("ROLE_ADMIN")
-                .requestMatchers("/auth/user").hasRole("ROLE_USER")
+                .requestMatchers("/auth/admin").hasRole("ADMIN")
+                .requestMatchers("/auth/user").hasRole("USER")
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form.disable());
