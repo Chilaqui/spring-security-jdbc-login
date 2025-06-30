@@ -1,32 +1,32 @@
 version: '3.8'
 services:
-  securityjdbc:
+  securitydb:
     image: mysql:5.7
-    container_name: security
+    container_name: securitydb
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: securityjdbc
-      MYSQL_USER: userjdbc
-      MYSQL_PASSWORD: 1108
+      MYSQL_DATABASE: securitydb
+      MYSQL_USER: User
+      MYSQL_PASSWORD: 1107
     ports:
       - "3307:3306"
     volumes:
       - ./data:/var/lib/mysql
     networks: 
-      - securityjdbcnet
+      - securitynet
   
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     restart: always
     environment:
-      PMA_HOST: securityjdbc
+      PMA_HOST: securitydb
       PMA_PORT: 3306
     depends_on:
-      - securityjdbc
+      - securitydb
     networks:
-      - securityjbcnet
+      - securitynet
     ports:
       - "8081:80"
 networks:
