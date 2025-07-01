@@ -18,10 +18,17 @@ public class AuthController {
     public ResponseEntity<?> userEntity(){
         return ResponseEntity.ok("Bien logiado usuario");
     }
-
+    // Usuarios de cualquier autetificado
     @GetMapping("/ad")
     public String us(){
         return "Hola admin";
+    }
+
+    //Usurios con Admin
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/del")
+    public String adminPega(){
+        return "Hola admin, esta es pagina es con preauthorizer";
     }
 
 
